@@ -184,9 +184,9 @@ class SWclient:
         return response.json()
 
 
-    def del_order(self, order_id): # string
+    def del_order(self, order_id): # oid is int by  default needs converted to string
 
-        url = 'https://api.schwabapi.com/trader/v1/accounts/' + self.account_hash_num + '/orders' + order_id
+        url = 'https://api.schwabapi.com/trader/v1/accounts/' + self.account_hash_num + '/orders/' + str(order_id)
 
         headers = {
             'accept': '*/*',
