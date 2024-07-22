@@ -1,20 +1,25 @@
 
-
 def fx(stock, trials=10000):
     qdata = X.price_history(stock, full_time=True)['candles']
     price_array = [row['open'] for row in qdata]
 
     wins = 0
     skip_trials = 0
-    
+
     plot = False
 
+    # RUN THIS MANY TRIALS
     for j in range(trials):
 
         random_index = random.randrange(0, len(price_array) - 22, 1)
 
         init_datetime = float(qdata[random_index]['datetime'])
         skip = False
+
+
+        # DETERMINE GOOD PRICING WINDOWS AND NO DAY-DAY OVERLAP
+
+
         for i in range(random_index + 1, random_index + 20):
             row_date_time = float(qdata[i]['datetime'])
 
@@ -26,7 +31,8 @@ def fx(stock, trials=10000):
                 #print(row_date_time)
                 #print(init_datetime)
                 skip_trials+=1
-                skip= True
+                skip = True
+                break
 
             init_datetime = row_date_time
 
@@ -40,6 +46,10 @@ def fx(stock, trials=10000):
             #print(price_array[random_index:random_index+20])
             window_price_array = price_array[random_index:random_index+20]
 
+
+            # BUILDING COST BASIS
+
+
             for i in range(random_index, random_index+20):
 
                 cost_basis.append(sum(price_array[random_index:i+1])/((i-random_index)+1))
@@ -50,6 +60,8 @@ def fx(stock, trials=10000):
             shares = 1
 
             #print(qdata[random_index:random_index+20])
+
+            # BUILDING PROFIT LOSS ARRAYS
 
             for row in qdata[random_index:random_index+20]:
                 high = row['high']
@@ -65,20 +77,19 @@ def fx(stock, trials=10000):
                 shares += 1
 
             value = max(max_profit_loss)
-            print(value)
-            
+
             if plot:
-                    
+
                 plt.subplot(2,1,1)
                 plt.title('Profit and Loss (g - high prices) (r - open price)')
                 plt.plot(max_profit_loss, color='g')
                 plt.plot(profit_loss_at_open, color= 'r')
-    
+
                 plt.subplot(2, 1, 2)
                 plt.title('Price of asset and cost basis (blue)')
                 plt.plot(window_price_array, color = 'black')
                 plt.plot(cost_basis, color = 'blue')
-    
+
                 plt.subplots_adjust(left=0.1,
                                     bottom=0.1,
                                     right=0.9,
@@ -88,7 +99,7 @@ def fx(stock, trials=10000):
             else:
                 pass
 
-            plt.show()
+            #plt.plot(max_profit_loss)
 
             for pl in max_profit_loss:
                 if pl>0:
@@ -114,8 +125,7 @@ def fx(stock, trials=10000):
         
             plt.show()'''
 
-
-    print(str(wins) + ' wins out of '+ str(j)+ ' trials, with '+ str(skip_trials)+ ' skipped trials')
-
+    #plt.show()
+    print(str(wins) + ' wins out of '+ str(j)+ ' trials, with '+ str(skip_trials)+ ' skipped trials, total: '+ str(wins+skip_trials))
 
 
