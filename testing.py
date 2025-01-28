@@ -9,53 +9,15 @@ import matplotlib.pyplot as plt
 import math as m
 from scipy.signal import argrelextrema
 
-'''
-app_key = 'NKZXXztAlpiGiyZc44errtsrsMInsF60'
-sec_key = 'YUdGqUhkkz7r7gHt'
-
-
-url = f'https://api.schwabapi.com/v1/oauth/authorize?client_id=NKZXXztAlpiGiyZc44errtsrsMInsF60&redirect_uri=https://127.0.0.1'
-print(url)
-
-headers = {
-    'accept': 'application/json',
-    'Authorization': 'Bearer I0.b2F1dGgyLmNkYy5zY2h3YWIuY29t.tEe7I6jMs1HgsSi-TWOdIvKGOnWzCF3mzTh3oeNy8PU@',
-}
-
-params = {
-    'symbols': 'NFLX, COST, TSLA, NVDA, HD, LLY',
-    'fields': 'quote',
-    'indicative': 'false',
-}
-
-response = requests.get('https://api.schwabapi.com/marketdata/v1/quotes', params=params, headers=headers)
-
-print(response.json())
-'''
-
-# Account number = 69464639
-# Hashed acc = 7AB7448405301904073BD521EEC25E1E727C5EC5C5959501EE8732497E91BE4F
-
-
-# decoded code = C0.b2F1dGgyLmZiZC5zY2h3YWIuY29t.SR_EhQPFLmE8YwBWEC04YBWClwpTDDKRxmGwEgc0yg8@
-
-
 
 class SWclient:
 
     def __init__(self):
 
-        #"accountNumber": "69464639",
-        #"hashValue": "7AB7448405301904073BD521EEC25E1E727C5EC5C5959501EE8732497E91BE4F"
-
-        # 'F4CD9DB8470C0BB53D322E6157336D31D07D0D3549F8D85CFD6615E618806376' new hash value from new auth key, using own acc fx
-
-        self.refresh_token = 'dnS3K-LnGjPI7tvoi96GfEJF9LGPa9INmy250v0Va6idPUiMIZyoj72_4w8zj8PQRzKpPTYbDSXaKBuU1eQMN6epkNrNB4f_EDRMxP1gGt_qWvKxNcek6LCw468oQspgI9B8BVo83ak@'
-
-        self.authorization_token = 'Bearer I0.b2F1dGgyLmJkYy5zY2h3YWIuY29t.RwQDRchduWjQGre5alLic9VF5-NAEtpZ-sJyTNGpzyk@'
-
-        self.account_hash_num = 'F4CD9DB8470C0BB53D322E6157336D31D07D0D3549F8D85CFD6615E618806376'
-
+        self.refresh_token = ''
+        self.authorization_token = ''
+        self.account_hash_num = ''
+        
     def quote_data(self, stocks):
 
         headers = {
